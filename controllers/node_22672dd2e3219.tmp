@@ -1,0 +1,16 @@
+let express = require("express");
+let router = express.Router();
+let sequelize = require("../db");
+let SuperBowlModel = sequelize.import("../models/team");
+
+router.post("/sbtable", function (req, res) {
+    let SuperBowlTeams = req.body.SuperBowlTeams;
+    let SuperBowlWins = req.body.SuperBowlWins;
+
+    SuperBowlModel.create({
+        SuperBowlTeams: SuperBowlTeams,
+        SuperBowlWins: SuperBowlWins,
+    }).then(item => {
+        res.json({ item });
+    });
+});
